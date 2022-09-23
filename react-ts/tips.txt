@@ -1,0 +1,112 @@
+for react with typescript
+
+npx create-react-app my-app --template typescript
+
+--------------------------------
+
+// npm init -y    to install package.json
+
+// meth 2 la tshagel typescipt
+// install globally awal shi
+//npx tsc ex.ts           // for compiling
+
+let a: string[] = ["heloo", "everyone", "m"];
+
+console.log(a);
+// ====================
+
+let person: {
+  name: string;
+  age: number;
+};
+
+//     any
+let p = {
+  name: "Max",
+  age: 32,
+};
+
+console.log(p);
+
+// interface person {
+//   name: string;
+//   age: number;
+// }
+
+// //     any
+// let p: person = {
+//   name: "Max",
+//   age: 32,
+// };
+
+console.log(p);
+
+// array of object kif ?
+let people: { name: string; age: number }[] = [{ name: "Max", age: 32 }];
+
+// let people: typeof person[] = [{ name: "Max", age: 32 },{ name: "samz", age: 12 }];
+console.log(people);
+
+//   Union Types
+let course: string | number;
+// or    let course: string | number[];
+course = 2828;
+course = "je";
+console.log(course);
+
+// =======================
+// Type Aliases
+
+type Person = {
+  name: string;
+  age: number;
+};
+
+let mosh: Person;
+
+//  Interface work better with objects and method objects,
+//   and types are better to work with functions,
+//  complex types
+
+//video 405
+// Functions and Functions Types
+
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+//cz this function never return
+// void hye aribe 3a null and undefined
+function printo(value: any): void {
+  console.log(value);
+}
+
+// ============================================
+
+//                      GENERICS
+
+function insertAtBeginningo(array: any[], value: any) {
+  const newArray = [value, ...array];
+  return newArray;
+}
+
+const demoArrayo = [1, 2, 3];
+const updatedArrayo = insertAtBeginning(demoArrayo, -1);
+console.log(updatedArrayo); // [-1 , 1 , 2 ,3]
+// updatedArray[0].split(''); // we cant use is cz its
+// available only for string -- so here we can use Generic
+//
+//
+//
+//==============================
+function insertAtBeginning<T>(array: T[], value: T) {
+  const newArray = [value, ...array];
+  return newArray;
+}
+
+const demoArray = [1, 2, 3];
+const updatedArray = insertAtBeginning(demoArray, -1);
+const stringArray = insertAtBeginning(["a", "b"], "d");
+console.log(updatedArray);
+// updatedArray[0].split(); // Property 'split' does not exist on type 'number'
+// he feydet el generic
