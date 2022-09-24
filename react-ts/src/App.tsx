@@ -2,7 +2,7 @@ import Todos from "./components/Todos";
 import Todo from "./models/todo";
 function App() {
   const todos = [new Todo("Learn React"), new Todo("Learn TypeScripto")];
-  console.log(todos);
+  // console.log(todos);  [{ id: 1.324 , text: "learn React" }, { id: 5.42, text: "learn React" }];
 
   return (
     <div>
@@ -12,8 +12,3 @@ function App() {
 }
 
 export default App;
-
-// (2) [Todo, Todo]
-
-// Todo {id: '2022-09-24T20:19:00.538Z', text: 'Learn React'}
-// Todo {id: '2022-09-24T20:19:00.538Z', text: 'Learn TypeScript'}
