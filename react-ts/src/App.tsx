@@ -1,12 +1,32 @@
+import React, { useState } from "react";
+import NewTodo from "./components/NewTodo";
 import Todos from "./components/Todos";
 import Todo from "./models/todo";
+
 function App() {
-  const todos = [new Todo("Learn React"), new Todo("Learn TypeScripto")];
+  // But TypeScript is not able to infer which types of values
+  // should be accepted in that array eventually.
+  const [todos, setTodos] = useState<Todo[]>([]);
+  // const todos = [new Todo("Learn React"), new Todo("Learn TypeScripto")];
   // console.log(todos);  [{ id: 1.324 , text: "learn React" }, { id: 5.42, text: "learn React" }];
+
+  const addTodoHandler = (todoText: string) => {
+    const newTodo = new Todo(todoText);
+    setTodos((prevTodos) => {
+      return prevTodos.concat(newTodo);
+    });
+  };
+
+  const removeTodoHandler = (todoId: string) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== todoId);
+    });
+  };
 
   return (
     <div>
-      <Todos items={todos} />
+      <NewTodo onAddTodo={addTodoHandler} />
+      <Todos items={todos} onRemoveTodo={removeTodoHandler} />
     </div>
   );
 }
