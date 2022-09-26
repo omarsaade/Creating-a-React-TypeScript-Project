@@ -1,21 +1,17 @@
-import Todo from "../models/todo";
 import TodoItem from "./TodoItem";
 import classes from "./Todos.module.css";
+import React, { useContext } from "react";
+import { TodosContext } from "../store/todos-context";
 
-// https://bobbyhadz.com/blog/typescript-declare-array-of-objects
-type AppProps = {
-  items: Todo[];
-  onRemoveTodo: (id: string) => void;
-};
-//            (items:AppProps)
-const Todos = (props: AppProps) => {
+const Todos = () => {
+  const todosCtx = useContext(TodosContext);
   return (
     <ul className={classes.todos}>
-      {props.items.map((item) => (
+      {todosCtx.items.map((item) => (
         <TodoItem
           key={item.id}
           data={item.text}
-          onRemoveTodo={props.onRemoveTodo.bind(null, item.id)}
+          onRemoveTodo={todosCtx.removeTodo.bind(null, item.id)}
         />
       ))}
     </ul>
@@ -25,7 +21,9 @@ const Todos = (props: AppProps) => {
 export default Todos;
 // [{id:22 , text: "jdj"},{}]
 
-// ===============================
+// =========
+
+// ================
 
 // import Todo from "../models/todo";
 // import TodoItem from "./TodoItem";
@@ -34,18 +32,18 @@ export default Todos;
 // // https://bobbyhadz.com/blog/typescript-declare-array-of-objects
 // type AppProps = {
 //   items: Todo[];
-//   onDelete: (text: string) => void;
+//   onRemoveTodo: (id: string) => void;
 // };
 // //            (items:AppProps)
 // const Todos = (props: AppProps) => {
-//   const removeItem = (t: string) => {
-//     props.onDelete(t);
-//   };
-
 //   return (
 //     <ul className={classes.todos}>
 //       {props.items.map((item) => (
-//         <TodoItem key={item.id} data={item.text} onRemove={removeItem} />
+//         <TodoItem
+//           key={item.id}
+//           data={item.text}
+//           onRemoveTodo={props.onRemoveTodo.bind(null, item.id)}
+//         />
 //       ))}
 //     </ul>
 //   );
